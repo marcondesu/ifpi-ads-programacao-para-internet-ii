@@ -1,0 +1,40 @@
+import {
+  // Body,
+  Controller,
+  Get,
+  // Post,
+  Query,
+  Render,
+  // Res,
+} from '@nestjs/common';
+import { AppService } from './app.service';
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get('/')
+  @Render('index')
+  hello(@Query('nome') nome = 'Visitante') {
+    const context = {
+      nome,
+      qtd_letras: nome.length,
+    };
+    return context;
+  }
+
+  @Get('form-imc')
+  @Render('imc')
+  formIMC(@Query('imc') imc: string) {
+    const registros = this.appService.obterRegistrosIMC();
+    const context = { imc, registros };
+
+    return context;
+  }
+
+  /* @Post('calcular-imc')
+  calcularIMC(@Res() res: Response, @Body() input: CalcularIMCInput) {
+    const imc = this.appService.calcularIMC(input);
+    res.redirect(`/form-imc?imc=${imc}`);
+  } */
+}
