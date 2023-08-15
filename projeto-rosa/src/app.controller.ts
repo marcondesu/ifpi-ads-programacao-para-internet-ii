@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Patch,
   Post,
   Query,
   Render,
@@ -44,4 +46,17 @@ export class AppController {
     const imc = parseFloat(this.appService.calcularIMC(input));
     res.redirect(`/form-imc?imc=${imc.toFixed(1)}`);
   }
+
+  @Post('/add')
+  addPost() {}
+
+  @Delete('/delete')
+  deletePost() {}
+
+  @Patch('/atualizar')
+  atualizarPost() {}
+
+  @Get('/investimento')
+  @Render('investimento')
+  doSmth() {}
 }

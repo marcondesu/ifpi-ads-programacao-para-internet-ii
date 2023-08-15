@@ -1,0 +1,38 @@
+:root {
+    background-color: #4A332D;
+    color: #D0C7C2;
+}
+
+.form-investimento {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-investimento input[type="text"],
+.form-investimento input[type="number"] {
+  margin-bottom: 10px;
+  min-width: 15rem;
+}
+
+.form-investimento .button-group {
+    display: flex;
+  }
+  
+  .form-investimento .button-group input[type="submit"] {
+    margin-right: 10px;
+  }
+
+.cima {
+  display: flex;
+}
+
+.titulo-e-form {
+  flex: 1;
+  padding: 1rem;
+}
+
+img {
+  width: 350px;
+  margin-left: 100px;
+}
