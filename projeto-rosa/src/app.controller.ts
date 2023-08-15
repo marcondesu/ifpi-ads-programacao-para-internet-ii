@@ -1,13 +1,20 @@
 import {
-  // Body,
+  Body,
   Controller,
   Get,
-  // Post,
+  Post,
   Query,
   Render,
-  // Res,
+  Res,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
+
+interface CalcularIMCInput {
+  nome: string;
+  peso: string;
+  altura: string;
+}
 
 @Controller()
 export class AppController {
@@ -23,7 +30,7 @@ export class AppController {
     return context;
   }
 
-  @Get('form-imc')
+  @Get('/form-imc')
   @Render('imc')
   formIMC(@Query('imc') imc: string) {
     const registros = this.appService.obterRegistrosIMC();
@@ -32,9 +39,9 @@ export class AppController {
     return context;
   }
 
-  /* @Post('calcular-imc')
+  @Post('/calcular-imc')
   calcularIMC(@Res() res: Response, @Body() input: CalcularIMCInput) {
-    const imc = this.appService.calcularIMC(input);
-    res.redirect(`/form-imc?imc=${imc}`);
-  } */
+    const imc = parseFloat(this.appService.calcularIMC(input));
+    res.redirect(`/form-imc?imc=${imc.toFixed(1)}`);
+  }
 }
