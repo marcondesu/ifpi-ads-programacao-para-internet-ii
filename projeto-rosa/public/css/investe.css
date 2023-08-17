@@ -10,7 +10,8 @@
 }
 
 .form-investimento input[type="text"],
-.form-investimento input[type="number"] {
+.form-investimento input[type="number"],
+.form-investimento input[type="date"] {
   margin-bottom: 10px;
   min-width: 15rem;
 }
@@ -33,6 +34,7 @@
 }
 
 img {
-  width: 350px;
+  width: 300px;
   margin-left: 100px;
+  padding: 2rem 4rem 0rem 0rem;
 }
