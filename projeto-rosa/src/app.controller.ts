@@ -1,14 +1,7 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-  Render,
-  Res,
-} from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Body, Controller, Get, Post, Query, Render, Res } from "@nestjs/common";
 import { Response } from 'express';
-import { AppService, CalcularIMCInput, Produto } from './app.service';
+import { AppService, CalcularIMCInput } from './app.service';
 
 @Controller()
 export class AppController {
@@ -38,30 +31,4 @@ export class AppController {
     const imc = parseFloat(this.appService.calcularIMC(input));
     res.redirect(`/form-imc?imc=${imc.toFixed(1)}`);
   }
-
-  @Get('/investimento')
-  @Render('investimento')
-  doNothing() {
-    return;
-  }
-
-  @Post('/add')
-  adicionarProduto(@Res() res: Response, @Body() input: Produto) {
-    this.appService.addProduct(input);
-
-    res.redirect('/investimento');
-  }
-
-  @Get('/list')
-  listarProdutos(@Res() res: Response) {
-    this.appService.listProducts();
-
-    res.redirect('/investimento');
-  }
-
-  @Post('/delete')
-  deletarProduto() {}
-
-  @Post('/update')
-  atualizarProduto() {}
 }
