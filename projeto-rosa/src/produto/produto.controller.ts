@@ -1,27 +1,27 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Render, Res } from "@nestjs/common";
-import { Response } from 'express';
-import { Produto, ProdutosService } from './produto.service';
+import { Body, Controller, Get, Post, Redirect, Render, Res } from "@nestjs/common";
+import { ProdutosService } from './produto.service';
+import { NovoProdutoDto } from './entities/Produto';
 
 @Controller()
 export class ProdutosController {
   constructor(private readonly produtosService: ProdutosService) {}
 
-  @Get('/formulario')
+  @Get('/listar')
+  @Render('produtos/listar')
+  public listarProdutos() {
+    return { produtos: this.produtosService.listarTodos() };
+  }
+
+  @Get('/novo')
   @Render('produtos/formulario')
-  doNothing() {
+  public formularioProduto() {
     return;
   }
 
-  @Post('/adicionar')
-  adicionarProduto(@Res() res: Response, @Body() input: Produto) {
-    this.produtosService.adicionarNovo(input);
-
-    res.redirect('/listar');
-  }
-
-  @Get('/listar')
-  listarProdutos(@Res() res: Response) {
-    return { produtos: this.produtosService.listarTodos() };
+  @Post('/salvar')
+  @Redirect('/listar')
+  public salvarProduto(@Body() input: NovoProdutoDto) {
+    this.produtosService.cadastrar(input);
   }
 }

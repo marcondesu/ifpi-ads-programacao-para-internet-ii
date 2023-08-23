@@ -1,14 +1,41 @@
-<table>
-    <tr>
-        <th>#</th>
-        <th>Nome</th>
-        <th>Taxa juros(%)</th>
-    </tr>
-    {{#each produtos as |produto|}}
-    <tr>
-        <td>{{produto.id}}</td>
-        <td>{{produto.nome}}</td>
-        <td>{{produto.taxaRentabilidade}}</td>
-    </tr>
-    {{/each}}
-</table>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+
+{{#> base }}
+  {{#* inline 'title'}}Produtos{{/inline}}
+
+  {{#*inline 'mainContent' }}
+    <h1>Produtos</h1>
+
+    <table>
+      <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Taxa juros(%)</th>
+      </tr>
+      {{#each produtos as |produto|}}
+      <tr>
+          <td>{{produto.id}}</td>
+          <td>{{produto.nome}}</td>
+          <td>{{produto.taxaRentabilidade}}</td>
+      </tr>
+      {{/each}}
+    </table>
+  
+  {{/inline}}
+{{/base }}

@@ -1,21 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
+import { NovoProdutoDto, Produto, ProdutoStatus } from './entities/Produto';
 import { ulid } from 'ulidx';
-
-export enum ProdutoStatus {
-  DISPONIVEL = 'Disponível',
-  INDISPONIVEL = 'Indisponível',
-}
-
-export class Produto {
-  id: string;
-  nome: string;
-  status: string;
-  destinacao: string;
-  taxaAdiministracao: number;
-  taxaRentabilidade: number;
-  vencimento: Date;
-}
 
 const produtos: Produto[] = [
   {
@@ -31,10 +17,21 @@ const produtos: Produto[] = [
 
 @Injectable()
 export class ProdutosService {
-  listarTodos() {
-    console.log(produtos);
+  cadastrar(input: NovoProdutoDto) {
+    const novoProduto: Produto = {
+      id: ulid(),
+      nome: input.nome,
+      destinacao: input.destinacao,
+      status: input.status,
+      taxaAdiministracao: input.taxaAdministracao,
+      taxaRentabilidade: input.taxaRentabilidade,
+      vencimento: input.vencimento,
+    }
+
+    produtos.push(novoProduto);
   }
-  adicionarNovo(input: Produto) {
-    console.log(input);
+
+  listarTodos() {
+    return produtos;
   }
 }

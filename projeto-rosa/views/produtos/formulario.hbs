@@ -3,28 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/investe.css">
-    <link rel="shortcut icon" href="images/dollar-coin.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/formulario.css">
+    <link rel="shortcut icon" href="images/formulario.svg" type="image/x-icon">
     <title>Formulário</title>
 </head>
 <body>
     <div class="cima">
         <div class="titulo-e-form">
-            <form class="form-investimento">
+            <form action="salvar" method="post" class="form-investimento">
                 <input type="text" name="nome" placeholder="Nome">
-                <input type="text" name="status" placeholder="Status (Disponível / Indisponível)">
+                <select id="status" name="status" required>
+                    <option value="DISPONÍVEL">Disponível</option>
+                        <option value="INDISPONÍVEL">Indisponível</option>
+                 </select>
                 <input type="text" name="destinacao" placeholder="Destinação">
-                <input type="number" name="taxa-rent" placeholder="Taxa de rentabilidade (1% a 20%)">
-                <input type="number" name="prazo" placeholder="Prazo para realização (meses)">
-                <input type="number" name="taxa-adm" placeholder="Taxa de administração">
+                <input type="number" step="0.01" name="taxa-adm" placeholder="Taxa de administração">
+                <input type="number" step="0.01" name="taxa-rent" placeholder="Taxa de rentabilidade (1% a 20%)">
                 <input type="date" name="vencimento" ="Data de vencimento">
 
-                <div class="buttons-group">
-                    <input formaction="add" formmethod="post" type="submit" value="Adicionar">
-                    <input formaction="list" formmethod="get" type="submit" value="Listar">
-                    <input formaction="remove" formmethod="post" type="submit" value="Remover">
-                    <input formaction="change-status" formmethod="post" type="submit" value="Mudar status">
-                </div>
+                <input type="submit" value="Adicionar">
             </form>
         </div>
     </div>

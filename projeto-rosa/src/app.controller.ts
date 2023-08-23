@@ -16,19 +16,4 @@ export class AppController {
     };
     return context;
   }
-
-  @Get('/form-imc')
-  @Render('imc')
-  formIMC(@Query('imc') imc: string) {
-    const registros = this.appService.obterRegistrosIMC();
-    const context = { imc, registros };
-
-    return context;
-  }
-
-  @Post('/calcular-imc')
-  calcularIMC(@Res() res: Response, @Body() input: CalcularIMCInput) {
-    const imc = parseFloat(this.appService.calcularIMC(input));
-    res.redirect(`/form-imc?imc=${imc.toFixed(1)}`);
-  }
 }
