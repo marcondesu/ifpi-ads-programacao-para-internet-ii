@@ -54,6 +54,12 @@ body {
     justify-content: flex-end;
 }
 
+.form-investimento label.date-label {
+    margin: 5px;
+    font-size: small;
+    color: #333;
+}
+
 @media (max-width: 600px) {
     .cima {
         padding: 20px;

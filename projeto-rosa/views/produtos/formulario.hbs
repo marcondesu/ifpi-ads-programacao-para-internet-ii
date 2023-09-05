@@ -11,15 +11,18 @@
     <div class="cima">
         <div class="titulo-e-form">
             <form action="salvar" method="post" class="form-investimento">
-                <input type="text" name="nome" placeholder="Nome">
+                <input type="text" name="nome" placeholder="Nome" required>
                 <select id="status" name="status" required>
                     <option value="DISPONÍVEL">Disponível</option>
-                        <option value="INDISPONÍVEL">Indisponível</option>
-                 </select>
-                <input type="text" name="destinacao" placeholder="Destinação">
-                <input type="number" step="0.01" name="taxa-adm" placeholder="Taxa de administração">
-                <input type="number" step="0.01" name="taxa-rent" placeholder="Taxa de rentabilidade (1% a 20%)">
-                <input type="date" name="vencimento" ="Data de vencimento">
+                    <option value="INDISPONÍVEL">Indisponível</option>
+                </select>
+                <input type="text" name="destinacao" placeholder="Destinação" required>
+                <input type="number" name="taxaAdministracao" placeholder="Taxa de administração" required>
+                <input type="number" name="taxaRentabilidade" placeholder="Taxa de rentabilidade (1% - 20%)" required>
+                <input type="number" name="prazo" placeholder="Prazo para realização (0 - 48 meses)" required>
+                
+                <label for="vencimento" class="date-label">Vencimento:</label>
+                <input type="date" id="vencimento" name="vencimento" required>
 
                 <input type="submit" value="Adicionar">
             </form>

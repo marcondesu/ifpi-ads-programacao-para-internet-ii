@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Redirect, Render, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, Redirect, Render, Res } from "@nestjs/common";
 import { ProdutosService } from './produto.service';
 import { NovoProdutoDto } from './entities/Produto';
 
@@ -23,5 +23,17 @@ export class ProdutosController {
   @Redirect('/listar')
   public salvarProduto(@Body() input: NovoProdutoDto) {
     this.produtosService.cadastrar(input);
+  }
+
+  @Get('/alternar-status')
+  @Redirect('/listar')
+  public alternarStatus(@Query('id') idProduto: string) {
+    this.produtosService.alternarStatus(idProduto);
+  }
+
+  @Get('remover')
+  @Redirect('/listar')
+  public removerProduto(@Query('id') idProduto: string) {
+    this.produtosService.remover(idProduto);
   }
 }

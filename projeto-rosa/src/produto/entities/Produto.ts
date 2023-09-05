@@ -1,7 +1,7 @@
 export enum ProdutoStatus {
-    DISPONIVEL = 'Disponível',
-    INDISPONIVEL = 'Indisponível',
-  }
+  DISPONIVEL = 'Disponível',
+  INDISPONIVEL = 'Indisponível',
+}
   
 export class Produto {
   id: string;
@@ -10,14 +10,16 @@ export class Produto {
   destinacao: string;
   taxaAdiministracao: number;
   taxaRentabilidade: number;
+  prazo: number;
   vencimento: Date;
 }
 
 export class NovoProdutoDto {
-    nome: string;
-    status: ProdutoStatus;
-    destinacao: string;
-    taxaAdministracao: number;
-    taxaRentabilidade: number;
-    vencimento: Date
+  nome: string;
+  status: ProdutoStatus;
+  destinacao: string;
+  taxaAdministracao: number;
+  taxaRentabilidade: number;
+  prazo: number;
+  vencimento: Date;
 }
