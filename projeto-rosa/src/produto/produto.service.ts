@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { NovoProdutoDto, Produto, ProdutoStatus } from './entities/Produto';
 import { ulid } from 'ulidx';
-import { DestinacaoException, NomeException, PrazoAposVencimentoException, PrazoException, TaxaAdmNegativaException, TaxaRentException } from './produto.exceptions';
+import { DestinacaoException, NomeException, PrazoException, TaxaAdmNegativaException, TaxaRentException } from './produto.exceptions';
 
 let produtos: Produto[] = [
   {
@@ -39,7 +39,7 @@ let produtos: Produto[] = [
 
 @Injectable()
 export class ProdutosService {
-  procurarPorId(idProduto: string): Produto | undefined {
+  private procurarPorId(idProduto: string): Produto | undefined {
     for (let i = 0; i < produtos.length; i++) {
       if (produtos[i].id == idProduto) {
         return produtos[i];
@@ -47,33 +47,25 @@ export class ProdutosService {
     }
   }
 
-  procurarPorIndex(idProduto: string): number | undefined {
-    for (let i = 0; i < produtos.length; i++) {
-      if (produtos[i].id == idProduto) {
-        return i - 1;
-      }
-    }
-  }
-
-  validarNome(nome: string) {
+  private validarNome(nome: string) {
     if (nome.length > 32) {
       throw new NomeException();
     }
   }
 
-  validarDestinacao(destinacao: string) {
+  private validarDestinacao(destinacao: string) {
     if (destinacao.length > 180) {
       throw new DestinacaoException();
     }
   }
 
-  validarTaxaRentabilidade(taxaRentabilidade: number) {
+  private validarTaxaRentabilidade(taxaRentabilidade: number) {
     if (taxaRentabilidade === 0 || taxaRentabilidade > 20) {
       throw new TaxaRentException();
     }
   }
 
-  validarPrazo(prazo: number, vencimento: Date) {
+  private validarPrazo(prazo: number) {
     if (prazo === 0 || prazo > 48) {
       throw new PrazoException();
     } /* else {
@@ -87,21 +79,21 @@ export class ProdutosService {
     } */
   }
 
-  validarTaxaAdministracao(taxaAdiministracao: number) {
+  private validarTaxaAdministracao(taxaAdiministracao: number) {
     if (taxaAdiministracao < 0) {
       throw new TaxaAdmNegativaException();
     }
   }
 
-  validarProduto(produto: Produto) {
+  private validarProduto(produto: Produto) {
     this.validarNome(produto.nome);
     this.validarDestinacao(produto.destinacao);
     this.validarTaxaAdministracao(produto.taxaAdiministracao);
     this.validarTaxaRentabilidade(produto.taxaRentabilidade);
-    this.validarPrazo(produto.prazo, produto.vencimento);
+    this.validarPrazo(produto.prazo);
   }
 
-  cadastrar(input: NovoProdutoDto) {
+  public cadastrar(input: NovoProdutoDto) {
     const novoProduto: Produto = {
       id: ulid(),
       nome: input.nome,
@@ -118,23 +110,31 @@ export class ProdutosService {
     produtos.push(novoProduto);
   }
 
-  listarTodos() {
+  public listarTodos() {
     return produtos;
   }
 
-  alternarStatus(idProduto: string) {
+  public alternarStatus(idProduto: string): boolean {
     const produto: Produto = this.procurarPorId(idProduto);
     
     produto.status = produto.status === ProdutoStatus.DISPONIVEL ? ProdutoStatus.INDISPONIVEL : ProdutoStatus.DISPONIVEL;
     
-    return;
+    if (produto) {
+      return true;
+    } else {
+      return false;
+    }
   }
   
-  remover(idProduto: string) {
+  public remover(idProduto: string): boolean {
     const prod: Produto = this.procurarPorId(idProduto);
     
     produtos = produtos.filter(produto => produto.id !== prod.id);
 
-    return;
+    if (prod) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
