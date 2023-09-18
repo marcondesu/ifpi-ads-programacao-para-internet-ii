@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import { IsArray, IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreatePessoaDto {
   @IsString()
@@ -11,9 +10,8 @@ export class CreatePessoaDto {
   nome: string;
 
   @IsNotEmpty()
-  @IsDate()
-  nascimento: number;
+  nascimento: string;
 
   @IsArray()
-  stack: string[];
+  stack: string[] | null;
 }

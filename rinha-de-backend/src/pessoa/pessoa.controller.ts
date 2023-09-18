@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Param } from '@nestjs/common';
 import { PessoaService } from './pessoa.service';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 
@@ -11,23 +11,23 @@ export class PessoaController {
     return await this.pessoaService.create(createPessoaDto);
   }
 
+  @Get('/:id')
+  async findOne(@Param('id') id: string) {
+    return await this.pessoaService.findOne(id);
+  }
+
   @Get()
+  async search(@Query('t') t: string) {
+    return await this.pessoaService.search(t);
+  }
+
+  @Get('/contagem-pessoas')
+  async count() {
+    return await this.pessoaService.count();
+  }
+
+  /* @Get()
   async findAll() {
     return await this.pessoaService.findAll();
-  }
-
-  /* @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pessoaService.findOne(id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePessoaDto: UpdatePessoaDto) {
-    return this.pessoaService.update(id, updatePessoaDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pessoaService.remove(id);
   } */
 }
