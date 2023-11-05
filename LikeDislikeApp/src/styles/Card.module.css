@@ -1,0 +1,50 @@
+.card {
+  border: 1px solid rgb(189, 189, 189);
+  width: 60%;
+  margin: 2rem;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.likeDislikeRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.likesDislikes {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.dislikeSpan {
+  margin: 0 2rem 0 1rem;
+}
+
+.likeSpan {
+  margin: 0 1rem 0 2rem;
+}
+
+.likeDislikeCounters {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin-bottom: 1rem;
+}
+
+.likeDislikeButtons {
+  display: flex;
+  font-size: small;
+  justify-content: space-around;
+  width: 100%;
+}

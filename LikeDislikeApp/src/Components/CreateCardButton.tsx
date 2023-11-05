@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../styles/CreateCardButton.module.css'
 import { CardData } from './CardComponent';
 
 type CreateCardButtonProps = {
@@ -26,14 +27,17 @@ const CreateCardButton: React.FC<CreateCardButtonProps> = ({ onCreateCard }) => 
   };
 
   return (
-    <form onSubmit={handleCreateCardClick}>
+    <form onSubmit={handleCreateCardClick} className={styles.form}>
       <input
         type="text"
         placeholder="Título do Card"
         value={title}
         onChange={handleTitleChange}
+        className={styles.input}
       />
-      <button type="submit">Criar Card</button>
+      <button type="submit" className={styles.button}>
+        Criar Card
+      </button>
     </form>
   );
 };

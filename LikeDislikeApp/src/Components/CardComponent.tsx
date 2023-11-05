@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import styles from '../styles/CardComponent.module.css';
 
 export type CardData = {
   id: number;
@@ -31,13 +32,11 @@ const CardComponent: React.FC<CardComponentProps> = ({ cards, setCards }) => {
   };
 
   return (
-    <div className="card-container">
+    <div className={styles.cardContainer}>
       {cards.map((card) => (
         <Card
           key={card.id}
-          title={card.title}
-          likes={card.likes}
-          dislikes={card.dislikes}
+          card={card}
           onLike={() => handleLike(card.id)}
           onDislike={() => handleDislike(card.id)}
         />
